@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="learngit:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="le.war">
+      <element id="artifact" artifact-name="learngit:war exploded" />
+    </root>
+  </artifact>
+</component>

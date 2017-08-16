@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.learnSpring.userManage.dao.UserDao">
+    <resultMap id="UserResultMap" type="com.cl.learnSpring.userManage.entity.UserPo">
+        <id column="cu_id" property="id" javaType="Integer"/>
+        <result column="cu_nickname" property="nickname" javaType="String"/>
+        <result column="cu_username" property="username" javaType="String"/>
+        <result column="cu_email" property="email" javaType="String"/>
+        <result column="cu_password" property="pswd" javaType="String"/>
+        <result column="cu_create_time" property="createTime" javaType="Date"/>
+        <result column="cu_last_login_time" property="lastLoginTime" javaType="Date"/>
+        <result column="cu_status" property="status" javaType="Integer"/>
+    </resultMap>
+
+    <sql id="User_Column_List">
+        cu_id,cu_username, cu_nickname, cu_email, cu_password, cu_create_time, cu_last_login_time,cu_status
+    </sql>
+    <sql id="userMessage">
+  cu_id,cu_username, cu_nickname, cu_email,cu_create_time, cu_last_login_time,cu_status  </sql>
+
+    <!-- 登录 -->
+    <select id="loginCheck" resultMap="UserResultMap">
+        select
+        <include refid="User_Column_List"/>
+        from go_cms_user
+        where cu_username = #{username} and cu_password = #{password}
+        and cu_status = 1
+    </select>
+
+
+</mapper>
