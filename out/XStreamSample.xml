@@ -1,0 +1,10 @@
+<com.cl.learnSpring.learnIoc.xml.User>
+  <userId>1</userId>
+  <userName>stream</userName>
+  <loginLogList>
+    <com.cl.learnSpring.learnIoc.xml.LoginLog>
+      <ip>170.16.0.103</ip>
+      <loginDate>2017-08-18 02:09:13.671 UTC</loginDate>
+    </com.cl.learnSpring.learnIoc.xml.LoginLog>
+  </loginLogList>
+</com.cl.learnSpring.learnIoc.xml.User>
