@@ -1,16 +1,18 @@
 package com.cl.learnSpring.userManage.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 记录用户相关信息的实体类
  */
-public class UserPo {
+public class UserPo implements Serializable{
     //0:禁止登录
     public static final Integer _0 = new Integer(2);
     //1:有效
     public static final Integer _1 = new Integer(1);
+
     private Integer id;
     /**
      * 昵称

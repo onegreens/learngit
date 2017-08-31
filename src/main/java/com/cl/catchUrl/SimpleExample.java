@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -17,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class SimpleExample {
 
     public static void main(String[] args) {
-//        printHref(getUrl("https://www.baidu.com/"));
-        Save_Html("http://v.youku.com/v_show/id_XMjgxMTY4NTE1Ng==.html","id_XMjgxMTY4NTE1Ng");
+        printHref(getUrl("http://www.360kan.com/cover/switchsite?site=sohu&id=PrdocX7kTzbuMH&category=2"));
+//        Save_Html("http://v.youku.com/v_show/id_XMjgxMTY4NTE1Ng==.html","id_XMjgxMTY4NTE1Ng");
 //        Get_Localhtml("out/catch");
     }
 
@@ -86,12 +87,19 @@ public class SimpleExample {
     public static void printHref(Document document) {
         if (document==null)
             return;
+        System.out.println(document.title());
         Elements elements = document.select("a");
         for (Element element : elements) {
-            String href = element.attr("href");
-            System.out.println(href);
-            if (isHref(href)){
-                Save_Html(href,getFileName());
+            if ("num-tab-main g-clear js-tab".equals(element.parent().className())){
+                String href = element.attr("href");
+                String num = element.attr("data-num");
+                String from = element.attr("data-daochu");
+                System.out.println(num);
+                System.out.println(from.split("=")[1]);
+                System.out.println(href);
+//                if (isHref(href)){
+//                    Save_Html(href,getFileName());
+//                }
             }
         }
     }

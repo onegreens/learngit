@@ -13,3 +13,6 @@ application.properties文件属性：
 7. springmvc :说明jsp文件的前缀后缀
 8. 链接数据库的各项属性说明
 9. mybatis的各配置的扫描路径
+
+使用spring cache
+1. 需要为需要进行缓存的实体类进行序列化

@@ -2,6 +2,7 @@ package com.cl.learnSpring.userManage.controller;
 
 import com.cl.learnSpring.userManage.entity.UserPo;
 import com.cl.learnSpring.userManage.service.UserService;
+import com.cl.learnSpring.userManage.service.impl.CacheServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class LoginController {
     @Resource
     private UserService userService;
 
+    @Resource
+    CacheServiceImpl cacheService;
+
     @RequestMapping("/")
     public String index() {
         return "欢迎";
@@ -31,13 +35,34 @@ public class LoginController {
 
     @RequestMapping(path = "/login.do", method = {RequestMethod.GET})
     public String login() {
-        return "login";    }
+        return "login";
+    }
+
+    @RequestMapping(path = "/cache.do", method = {RequestMethod.GET})
+    public String cache() {
+        return "cache";
+    }
 
     @RequestMapping(path = "/userLogin.do", method = {RequestMethod.POST})
     public ModelAndView userLogin(HttpSession session, @RequestParam String username, @RequestParam String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserPo userPo = userService.login(username, password);
         if (userPo == null) {
             return new ModelAndView("login", "error", "账户名称或密码错误");
+        }
+        session.setAttribute("isLogin", true);
+        session.setAttribute("user_id", userPo.getId());
+        session.getServletContext().setAttribute("userId", userPo.getId());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(userPo);
+        modelAndView.setViewName("main");
+        return modelAndView;
+    }
+
+    @RequestMapping(path = "/userCache.do", method = {RequestMethod.POST})
+    public ModelAndView userCache(HttpSession session, @RequestParam String username, @RequestParam String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        UserPo userPo = cacheService.login(username, password);
+        if (userPo == null) {
+            return new ModelAndView("cache", "error", "账户名称或密码错误");
         }
         session.setAttribute("isLogin", true);
         session.setAttribute("user_id", userPo.getId());

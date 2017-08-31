@@ -7,14 +7,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- 引入数据库配置文件 -->
-    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <set>
-                <value>classpath:jdbc.properties</value>
-            </set>
-        </property>
-    </bean>-->
 
     <!-- 引入数据库配置文件 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
