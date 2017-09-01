@@ -48,6 +48,11 @@ public class UserPo implements Serializable{
     public UserPo() {
     }
 
+    public UserPo(Integer id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
     public UserPo(String username, String pswd) {
         this.username = username;
         this.pswd = pswd;
@@ -144,5 +149,48 @@ public class UserPo implements Serializable{
                 ", lastLoginTime=" + lastLoginTime +
                 ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserPo userPo = (UserPo) o;
+
+        if (id != null ? !id.equals(userPo.id) : userPo.id != null) return false;
+        if (nickname != null ? !nickname.equals(userPo.nickname) : userPo.nickname != null) return false;
+        if (username != null ? !username.equals(userPo.username) : userPo.username != null) return false;
+        if (email != null ? !email.equals(userPo.email) : userPo.email != null) return false;
+        if (pswd != null ? !pswd.equals(userPo.pswd) : userPo.pswd != null) return false;
+        if (createTime != null ? !createTime.equals(userPo.createTime) : userPo.createTime != null) return false;
+        if (lastLoginTime != null ? !lastLoginTime.equals(userPo.lastLoginTime) : userPo.lastLoginTime != null)
+            return false;
+        return status != null ? status.equals(userPo.status) : userPo.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (pswd != null ? pswd.hashCode() : 0);
+        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + (lastLoginTime != null ? lastLoginTime.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        UserPo userPo1 = new UserPo("111","111");
+        UserPo userPo2 = new UserPo("111","111");
+        if (userPo1 == userPo1){
+            System.out.println("userPo1 == userPo1");
+        }
+        if (userPo1.equals(userPo2)){
+            System.out.println("userPo1.equals(userPo2)");
+
+        }
     }
 }

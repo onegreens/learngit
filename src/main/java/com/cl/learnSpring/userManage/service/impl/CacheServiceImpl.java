@@ -4,8 +4,11 @@ import com.cl.learnSpring.userManage.dao.UserDao;
 import com.cl.learnSpring.userManage.entity.CacheManager;
 import com.cl.learnSpring.userManage.entity.UserPo;
 import com.cl.learnSpring.userManage.service.CacheService;
+import com.cl.learnSpring.userManage.service.UserService;
 import com.cl.learnSpring.userManage.util.PasswordHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,6 +19,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by cl on 2017/8/31.
  */
 @Service
+@CacheConfig
 public class CacheServiceImpl implements CacheService {
 
     CacheManager<UserPo> cacheManager;
@@ -26,6 +30,9 @@ public class CacheServiceImpl implements CacheService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    UserService userService;
 
 
     @Override
@@ -55,5 +62,21 @@ public class CacheServiceImpl implements CacheService {
 
         }
 
+    }
+
+    /**
+     *
+     * @param userName
+     * @return
+     */
+    @Cacheable(cacheNames = "getUserPo")
+    public UserPo getUserPo(String userName,String password) throws Exception {
+        return getUserPoByName(userName,password);
+    }
+
+    UserPo getUserPoByName(String userName,String password) throws Exception{
+        UserPo userPo = userService.login(userName,password);
+        System.out.println("从缓存中获取");
+        return userPo;
     }
 }

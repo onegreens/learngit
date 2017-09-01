@@ -12,10 +12,18 @@ public interface CacheService {
 
     /**
      * 根据邮箱和密码获取用户信息
+     *
      * @param username
      * @param password
      * @return
      */
     UserPo login(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    /**
+     * 根据邮箱和密码获取用户信息
+     *
+     * @return
+     */
+    UserPo getUserPo(String userName,String password) throws Exception;
 
 }
