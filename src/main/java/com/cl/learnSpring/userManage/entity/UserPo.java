@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * 记录用户相关信息的实体类
  */
-public class UserPo implements Serializable{
+public class UserPo implements Serializable {
     //0:禁止登录
     public static final Integer _0 = new Integer(2);
     //1:有效
@@ -143,6 +143,7 @@ public class UserPo implements Serializable{
         return "UserPo{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", pswd='" + pswd + '\'' +
                 ", createTime=" + createTime +
@@ -183,14 +184,18 @@ public class UserPo implements Serializable{
     }
 
     public static void main(String[] args) {
-        UserPo userPo1 = new UserPo("111","111");
-        UserPo userPo2 = new UserPo("111","111");
-        if (userPo1 == userPo1){
+        UserPo userPo1 = new UserPo("111", "111");
+        UserPo userPo2 = new UserPo("111", "111");
+        if (userPo1 == userPo1) {
             System.out.println("userPo1 == userPo1");
         }
-        if (userPo1.equals(userPo2)){
+        if (userPo1.equals(userPo2)) {
             System.out.println("userPo1.equals(userPo2)");
 
         }
+    }
+
+    public boolean isVipMember(String nickname) {
+        return "tom".equals(nickname);
     }
 }
